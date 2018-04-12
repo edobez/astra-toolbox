@@ -26,12 +26,15 @@
 import os
 import numpy as np
 
-from distutils.core import setup
+from distutils.core import setup, Extension
 from pkg_resources import parse_version
 
 from Cython.Distutils import build_ext
 from Cython.Build import cythonize
 import Cython
+
+from pathlib import Path
+
 if parse_version(Cython.__version__) < parse_version('0.13'):
     raise ImportError('Cython version should be at least 0.13')
 
@@ -58,17 +61,19 @@ pkgdata = {}
 if os.environ.get('ASTRA_INSTALL_LIBRARY_AS_DATA', ''):
     pkgdata['astra'] = [os.environ['ASTRA_INSTALL_LIBRARY_AS_DATA']]
 
-cmdclass = {}
+p = Path(self_path) / 'astra'
 ext_modules = []
-
-ext_modules = cythonize(os.path.join(self_path, 'astra', '*.pyx'),
-                        language_level=2)
-cmdclass = {'build_ext': build_ext}
-
+for source in p.glob('*.pyx'):
+    ext_modules.append(Extension(name='astra.' + os.path.splitext(source.name)[0],
+                                 sources=[source.relative_to(self_path).as_posix()],
+                                 extra_compile_args=["-Zi", "/Od"],
+                                 extra_link_args=["-debug"]
+                                 ))
 for m in ext_modules:
     if m.name == 'astra.plugin_c':
-        m.sources.append(os.path.join(self_path, 'astra', 'src',
-                                      'PythonPluginAlgorithm.cpp'))
+        m.sources.append((Path(self_path) / 'astra' / 'src' / 'PythonPluginAlgorithm.cpp').relative_to(self_path).as_posix())
+
+cmdclass = {'build_ext': build_ext}
 
 setup(name='astra-toolbox',
       version='1.9.0dev',
@@ -76,18 +81,11 @@ setup(name='astra-toolbox',
       author='D.M. Pelt',
       author_email='D.M.Pelt@cwi.nl',
       url='https://github.com/astra-toolbox/astra-toolbox',
-      # ext_package='astra',
-      # ext_modules = cythonize(
-      #     Extension("astra/*.pyx",
-      #               extra_compile_args=extra_compile_args,
-      #               extra_linker_args=extra_compile_args)),
       license='GPLv3',
-      ext_modules=ext_modules,
+      ext_modules=cythonize(ext_modules, language_level=2, compiler_directives={'embedsignature': True}),
       include_dirs=[np.get_include()],
       cmdclass=cmdclass,
-      # ext_modules = [Extension("astra","astra/astra.pyx")],
       packages=['astra', 'astra.plugins'],
       package_data=pkgdata,
       requires=['numpy', 'scipy', 'six'],
-	  gdb_debug=True
       )
