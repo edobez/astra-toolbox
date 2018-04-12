@@ -8,7 +8,8 @@ copy "%CUDA_PATH%\bin\cufft64_80.dll" "%CONDA_PREFIX%\Library\bin"
 
 cd python
 
-rd /s /q build
+REM rd /s /q build
+del /q "%CONDA_PREFIX%\lib\site-packages\astra"
 rd /s /q "%CONDA_PREFIX%\lib\site-packages\astra"
 
 set VS90COMNTOOLS=%VS140COMNTOOLS%
@@ -16,6 +17,6 @@ set CL=/DASTRA_CUDA /DASTRA_PYTHON
 set INCLUDE=%R%\include;%R%\lib\include;%CUDA_PATH%\include
 copy "%CONDA_PREFIX%\Library\lib\AstraCuda64D.lib" astra.lib
 python builder_debug.py build_ext --compiler=msvc install
-copy "%CONDA_PREFIX%\Library\bin\AstraCuda64D.dll" "%CONDA_PREFIX%\lib\site-packages\astra"
+copy "%CONDA_PREFIX%\Library\bin\AstraCuda64D.dll" "%CONDA_PREFIX%\lib\site-packages\astra\"
 
 cd /D %R%
