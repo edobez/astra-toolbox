@@ -31,3 +31,11 @@ __pycache__
 /build/linux/ltmain.sh
 /build/linux/src/*
 /build/linux/matlab/*
+/.vs/
+/.idea/
+/bin/
+
+astra_vc14.VC.*
+astra_vc14_tests.VC.*
+vc140.pdb
+*.vcxproj.user
