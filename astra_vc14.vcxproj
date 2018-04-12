@@ -221,6 +221,7 @@
       <TargetMachinePlatform>64</TargetMachinePlatform>
       <GenerateLineInfo>true</GenerateLineInfo>
       <CodeGeneration>compute_20,sm_20;compute_30,sm_30;compute_35,sm_35;compute_50,sm_50;compute_60,sm_60;compute_60,compute_60</CodeGeneration>
+      <GPUDebugInfo>true</GPUDebugInfo>
     </CudaCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -512,15 +513,24 @@
     <ClCompile Include="src\Float32Data.cpp" />
     <ClCompile Include="src\Float32Data2D.cpp" />
     <ClCompile Include="src\Float32Data3D.cpp" />
-    <ClCompile Include="src\Float32Data3DGPU.cpp" />
+    <ClCompile Include="src\Float32Data3DGPU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\Float32Data3DMemory.cpp" />
     <ClCompile Include="src\Float32ProjectionData2D.cpp" />
     <ClCompile Include="src\Float32ProjectionData3D.cpp" />
-    <ClCompile Include="src\Float32ProjectionData3DGPU.cpp" />
+    <ClCompile Include="src\Float32ProjectionData3DGPU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\Float32ProjectionData3DMemory.cpp" />
     <ClCompile Include="src\Float32VolumeData2D.cpp" />
     <ClCompile Include="src\Float32VolumeData3D.cpp" />
-    <ClCompile Include="src\Float32VolumeData3DGPU.cpp" />
+    <ClCompile Include="src\Float32VolumeData3DGPU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\Float32VolumeData3DMemory.cpp" />
     <ClCompile Include="src\ForwardProjectionAlgorithm.cpp" />
     <ClCompile Include="src\Fourier.cpp" />
@@ -556,37 +566,99 @@
     <ClCompile Include="src\XMLNode.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="cuda\2d\algo.h" />
-    <ClInclude Include="cuda\2d\arith.h" />
-    <ClInclude Include="cuda\2d\astra.h" />
-    <ClInclude Include="cuda\2d\cgls.h" />
-    <ClInclude Include="cuda\2d\darthelper.h" />
-    <ClInclude Include="cuda\2d\dims.h" />
-    <ClInclude Include="cuda\2d\em.h" />
-    <ClInclude Include="cuda\2d\fan_bp.h" />
-    <ClInclude Include="cuda\2d\fan_fp.h" />
-    <ClInclude Include="cuda\2d\fbp.h" />
-    <ClInclude Include="cuda\2d\fbp_filters.h" />
-    <ClInclude Include="cuda\2d\fft.h" />
-    <ClInclude Include="cuda\2d\par_bp.h" />
-    <ClInclude Include="cuda\2d\par_fp.h" />
-    <ClInclude Include="cuda\2d\sart.h" />
-    <ClInclude Include="cuda\2d\sirt.h" />
-    <ClInclude Include="cuda\2d\util.h" />
-    <ClInclude Include="cuda\3d\algo3d.h" />
-    <ClInclude Include="cuda\3d\arith3d.h" />
-    <ClInclude Include="cuda\3d\astra3d.h" />
-    <ClInclude Include="cuda\3d\cgls3d.h" />
-    <ClInclude Include="cuda\3d\cone_bp.h" />
-    <ClInclude Include="cuda\3d\cone_fp.h" />
-    <ClInclude Include="cuda\3d\darthelper3d.h" />
-    <ClInclude Include="cuda\3d\dims3d.h" />
-    <ClInclude Include="cuda\3d\fdk.h" />
-    <ClInclude Include="cuda\3d\mem3d.h" />
-    <ClInclude Include="cuda\3d\par3d_bp.h" />
-    <ClInclude Include="cuda\3d\par3d_fp.h" />
-    <ClInclude Include="cuda\3d\sirt3d.h" />
-    <ClInclude Include="cuda\3d\util3d.h" />
+    <ClInclude Include="cuda\2d\algo.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\2d\arith.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\2d\astra.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\2d\cgls.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\2d\darthelper.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\2d\dims.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\2d\em.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\2d\fan_bp.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\2d\fan_fp.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\2d\fbp.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\2d\fbp_filters.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\2d\fft.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\2d\par_bp.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\2d\par_fp.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\2d\sart.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\2d\sirt.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\2d\util.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\3d\algo3d.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\3d\arith3d.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\3d\astra3d.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\3d\cgls3d.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\3d\cone_bp.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\3d\cone_fp.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\3d\darthelper3d.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\3d\dims3d.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\3d\fdk.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\3d\mem3d.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\3d\par3d_bp.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\3d\par3d_fp.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\3d\sirt3d.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="cuda\3d\util3d.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="include\astra\Algorithm.h" />
     <ClInclude Include="include\astra\AlgorithmTypelist.h" />
     <ClInclude Include="include\astra\ArtAlgorithm.h" />
@@ -601,25 +673,63 @@
     <ClInclude Include="include\astra\Config.h" />
     <ClInclude Include="include\astra\CudaBackProjectionAlgorithm.h" />
     <ClInclude Include="include\astra\CudaBackProjectionAlgorithm3D.h" />
-    <ClInclude Include="include\astra\CudaCglsAlgorithm.h" />
-    <ClInclude Include="include\astra\CudaCglsAlgorithm3D.h" />
-    <ClInclude Include="include\astra\CudaDartMaskAlgorithm.h" />
-    <ClInclude Include="include\astra\CudaDartMaskAlgorithm3D.h" />
-    <ClInclude Include="include\astra\CudaDartSmoothingAlgorithm.h" />
-    <ClInclude Include="include\astra\CudaDartSmoothingAlgorithm3D.h" />
-    <ClInclude Include="include\astra\CudaDataOperationAlgorithm.h" />
-    <ClInclude Include="include\astra\CudaEMAlgorithm.h" />
-    <ClInclude Include="include\astra\CudaFDKAlgorithm3D.h" />
-    <ClInclude Include="include\astra\CudaFilteredBackProjectionAlgorithm.h" />
-    <ClInclude Include="include\astra\CudaForwardProjectionAlgorithm.h" />
-    <ClInclude Include="include\astra\CudaForwardProjectionAlgorithm3D.h" />
-    <ClInclude Include="include\astra\CudaProjector2D.h" />
-    <ClInclude Include="include\astra\CudaProjector3D.h" />
-    <ClInclude Include="include\astra\CudaReconstructionAlgorithm2D.h" />
-    <ClInclude Include="include\astra\CudaRoiSelectAlgorithm.h" />
-    <ClInclude Include="include\astra\CudaSartAlgorithm.h" />
-    <ClInclude Include="include\astra\CudaSirtAlgorithm.h" />
-    <ClInclude Include="include\astra\CudaSirtAlgorithm3D.h" />
+    <ClInclude Include="include\astra\CudaCglsAlgorithm.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="include\astra\CudaCglsAlgorithm3D.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="include\astra\CudaDartMaskAlgorithm.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="include\astra\CudaDartMaskAlgorithm3D.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="include\astra\CudaDartSmoothingAlgorithm.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="include\astra\CudaDartSmoothingAlgorithm3D.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="include\astra\CudaDataOperationAlgorithm.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="include\astra\CudaEMAlgorithm.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="include\astra\CudaFDKAlgorithm3D.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="include\astra\CudaFilteredBackProjectionAlgorithm.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="include\astra\CudaForwardProjectionAlgorithm.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="include\astra\CudaForwardProjectionAlgorithm3D.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="include\astra\CudaProjector2D.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="include\astra\CudaProjector3D.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="include\astra\CudaReconstructionAlgorithm2D.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="include\astra\CudaRoiSelectAlgorithm.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="include\astra\CudaSartAlgorithm.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="include\astra\CudaSirtAlgorithm.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="include\astra\CudaSirtAlgorithm3D.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="include\astra\DataProjector.h" />
     <ClInclude Include="include\astra\DataProjectorPolicies.h" />
     <ClInclude Include="include\astra\FanFlatBeamLineKernelProjector2D.h" />
@@ -630,15 +740,21 @@
     <ClInclude Include="include\astra\Float32Data.h" />
     <ClInclude Include="include\astra\Float32Data2D.h" />
     <ClInclude Include="include\astra\Float32Data3D.h" />
-    <ClInclude Include="include\astra\Float32Data3DGPU.h" />
+    <ClInclude Include="include\astra\Float32Data3DGPU.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="include\astra\Float32Data3DMemory.h" />
     <ClInclude Include="include\astra\Float32ProjectionData2D.h" />
     <ClInclude Include="include\astra\Float32ProjectionData3D.h" />
-    <ClInclude Include="include\astra\Float32ProjectionData3DGPU.h" />
+    <ClInclude Include="include\astra\Float32ProjectionData3DGPU.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="include\astra\Float32ProjectionData3DMemory.h" />
     <ClInclude Include="include\astra\Float32VolumeData2D.h" />
     <ClInclude Include="include\astra\Float32VolumeData3D.h" />
-    <ClInclude Include="include\astra\Float32VolumeData3DGPU.h" />
+    <ClInclude Include="include\astra\Float32VolumeData3DGPU.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="include\astra\Float32VolumeData3DMemory.h" />
     <ClInclude Include="include\astra\ForwardProjectionAlgorithm.h" />
     <ClInclude Include="include\astra\Fourier.h" />
