@@ -33,7 +33,10 @@ from Cython.Distutils import build_ext
 from Cython.Build import cythonize
 import Cython
 
-from pathlib import Path
+try:
+    from pathlib import Path
+except ImportError as e:
+    from pathlib2 import Path
 
 if parse_version(Cython.__version__) < parse_version('0.13'):
     raise ImportError('Cython version should be at least 0.13')
@@ -62,12 +65,17 @@ if os.environ.get('ASTRA_INSTALL_LIBRARY_AS_DATA', ''):
     pkgdata['astra'] = [os.environ['ASTRA_INSTALL_LIBRARY_AS_DATA']]
 
 p = Path(self_path) / 'astra'
+root_p = (Path(self_path) / '..').resolve()
 ext_modules = []
 for source in p.glob('*.pyx'):
     ext_modules.append(Extension(name='astra.' + os.path.splitext(source.name)[0],
                                  sources=[source.relative_to(self_path).as_posix()],
-                                 extra_compile_args=["-Zi", "/Od"],
-                                 extra_link_args=["-debug"]
+                                 include_dirs=[(root_p / 'include').absolute().as_posix(),
+                                               (root_p / 'lib' / 'include').absolute().as_posix()],
+                                 library_dirs=[(root_p / 'lib' / 'x64').absolute().as_posix()],
+                                 extra_compile_args=["-Zi", "/Od", "/MDd"],
+                                 extra_link_args=["-debug"],
+                                 define_macros=[("_DEBUG", None), ("ASTRA_CUDA", None), ("ASTRA_PYTHON", None)]
                                  ))
 for m in ext_modules:
     if m.name == 'astra.plugin_c':
