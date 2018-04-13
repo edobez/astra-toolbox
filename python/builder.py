@@ -73,6 +73,8 @@ for source in p.glob('*.pyx'):
                                  include_dirs=[(root_p / 'include').absolute().as_posix(),
                                                (root_p / 'lib' / 'include').absolute().as_posix()],
                                  library_dirs=[(root_p / 'lib' / 'x64').absolute().as_posix()],
+                                 extra_compile_args=["-Zi", "/Od", "/MD"],
+                                 extra_link_args=["-debug"],
                                  # define_macros=[("ASTRA_CUDA", None), ("ASTRA_PYTHON", None)]
                                  ))
 for m in ext_modules:
