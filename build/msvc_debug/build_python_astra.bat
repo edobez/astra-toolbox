@@ -12,6 +12,7 @@ copy "%CUDA_PATH%\bin\cufft64_80.dll" "%CONDA_PREFIX%\Library\bin"
 
 cd python
 
+rd /s /q build
 del /q "%CONDA_PREFIX%\lib\site-packages\astra"
 rd /s /q "%CONDA_PREFIX%\lib\site-packages\astra"
 
